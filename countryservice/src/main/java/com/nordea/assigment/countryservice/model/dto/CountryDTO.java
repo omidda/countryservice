@@ -5,10 +5,14 @@ import com.nordea.assigment.countryservice.model.ouputs.IResult;
 public class CountryDTO extends CountryBriefDTO {
 
     private String capital;
-    private Integer population;
+    private Long population;
     private String flag_file_url;
 
-    public CountryDTO(String name, String country_code, String capital, Integer population, String flag_file_url) {
+    public CountryDTO(){
+        super();
+    }
+
+    public CountryDTO(String name, String country_code, String capital, Long population, String flag_file_url) {
         super(name, country_code);
         this.capital = capital;
         this.population = population;
@@ -23,11 +27,11 @@ public class CountryDTO extends CountryBriefDTO {
         this.capital = capital;
     }
 
-    public Integer getPopulation() {
+    public Long getPopulation() {
         return population;
     }
 
-    public void setPopulation(Integer population) {
+    public void setPopulation(Long population) {
         this.population = population;
     }
 

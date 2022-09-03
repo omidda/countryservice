@@ -1,5 +1,6 @@
 package com.nordea.assigment.countryservice.service;
 
+import ch.qos.logback.core.encoder.EchoEncoder;
 import com.nordea.assigment.countryservice.model.dto.JsonDTO;
 import com.nordea.assigment.countryservice.model.ouputs.OperationOutput;
 import com.nordea.assigment.countryservice.model.ouputs.Output;
@@ -30,7 +31,10 @@ public class CountriesDataGatherImpl implements CountriesDataGather {
 
         if(connectionResult.isOperationSuccessful())
         {
-            return readStreamAndFetchJsonData();
+            output = readStreamAndFetchJsonData();
+
+            disconnectFromRestResource();
+
         } else {
             output = new SingleOutput(connectionResult);
         }
@@ -92,6 +96,24 @@ public class CountriesDataGatherImpl implements CountriesDataGather {
         return output;
 
     }
+
+    private OperationOutput disconnectFromRestResource() {
+
+        OperationOutput output;
+
+        try {
+            httpConnectionToRestSourse.disconnect();
+            output = new OperationOutput(OutputType.SUCCESS);
+        } catch (Exception exp) {
+            output = new OperationOutput(OutputType.ERROR,
+                    "connection to Rest source could not be disconnected");
+        }
+
+        return output;
+    }
+
+
+
 
 
 }

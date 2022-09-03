@@ -1,2 +1,13 @@
-package com.nordea.assigment.countryservice.service;public interface JsonProcessor {
+package com.nordea.assigment.countryservice.service;
+
+import com.nordea.assigment.countryservice.model.dto.CountryDTO;
+import com.nordea.assigment.countryservice.model.ouputs.ListOutput;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import java.util.List;
+
+public interface JsonProcessor {
+
+    ListOutput processJsonStringAndConvertToCountriesList(String inputJson);
 }

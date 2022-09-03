@@ -9,6 +9,11 @@ public class ListOutput extends Output {
         super(type, message);
     }
 
+    public ListOutput(OutputType type, List<IResult> results) {
+        super(type);
+        this.results = results;
+    }
+
     public ListOutput(OutputType type, String message, List<IResult> results) {
         super(type, message);
         this.results = results;
