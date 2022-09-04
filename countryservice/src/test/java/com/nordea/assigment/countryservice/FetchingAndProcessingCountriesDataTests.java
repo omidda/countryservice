@@ -7,15 +7,10 @@ import com.nordea.assigment.countryservice.model.ouputs.OutputType;
 import com.nordea.assigment.countryservice.model.ouputs.SingleOutput;
 import com.nordea.assigment.countryservice.service.CountriesDataGather;
 import com.nordea.assigment.countryservice.service.JsonProcessor;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

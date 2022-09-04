@@ -7,6 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,14 @@ import java.util.List;
 @Scope("singleton")
 public class JsonProcessorImpl  implements JsonProcessor{
 
-    private final JSONParser jsonParser = new JSONParser();
+    private final static JSONParser jsonParser = new JSONParser();
+
+    private final CountryServiceLogger loggerService;
+
+    @Autowired
+    public JsonProcessorImpl(CountryServiceLogger loggerService) {
+        this.loggerService = loggerService;
+    }
 
     @Override
     public ListOutput processJsonStringAndConvertToCountriesList(String inputJson){
@@ -37,8 +45,10 @@ public class JsonProcessorImpl  implements JsonProcessor{
                 countriesOutput = new ListOutput(OutputType.ERROR,"Error in processing and converting JSON data");
             }
 
-        } catch (ParseException e) {
+        } catch (ParseException exception) {
             countriesOutput = new ListOutput(OutputType.ERROR,"Invalid JSON for conversions");
+            loggerService.logAnOutput(countriesOutput,this.getClass());
+            loggerService.logAnException(exception,this.getClass());
         }
 
         return countriesOutput;
@@ -76,7 +86,7 @@ public class JsonProcessorImpl  implements JsonProcessor{
             outputCountry.setFlag_file_url(flagsOfCountryJsonObject.get("png").toString());
         }
         catch (Exception exception){
-
+            loggerService.logAnException(exception,this.getClass());
         }
 
         return outputCountry;

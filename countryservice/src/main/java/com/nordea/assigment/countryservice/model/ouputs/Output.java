@@ -24,7 +24,7 @@ public abstract class Output {
         return false;
     };
 
-    protected String getMessage() {
+    public String getMessage() {
         return message;
     }
 

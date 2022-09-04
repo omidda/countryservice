@@ -1,11 +1,10 @@
 package com.nordea.assigment.countryservice.service;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import com.nordea.assigment.countryservice.model.dto.JsonDTO;
 import com.nordea.assigment.countryservice.model.ouputs.OperationOutput;
-import com.nordea.assigment.countryservice.model.ouputs.Output;
 import com.nordea.assigment.countryservice.model.ouputs.OutputType;
 import com.nordea.assigment.countryservice.model.ouputs.SingleOutput;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +17,14 @@ import java.util.Scanner;
 @Scope("singleton")
 public class CountriesDataGatherImpl implements CountriesDataGather {
 
-    private final String countriesRestUrl = "https://restcountries.com/v3.1/all";
-    private final String countriesRestHttpMethod = "GET";
+    private final CountryServiceLogger loggerService;
+
+    @Autowired
+    public CountriesDataGatherImpl(CountryServiceLogger loggerService) {
+        this.loggerService = loggerService;
+    }
+    private final static String countriesRestUrl = "https://restcountries.com/v3.1/all";
+    private final static String countriesRestHttpMethod = "GET";
     private HttpURLConnection httpConnectionToRestSourse;
 
 
@@ -61,11 +66,13 @@ public class CountriesDataGatherImpl implements CountriesDataGather {
             }
             else {
                 output = new OperationOutput(OutputType.ERROR, "Resource is not available, response code: " + httpResponceCode);
+                loggerService.logAnOutput(output,this.getClass());
             }
 
         }
-        catch (IOException exp){
+        catch (IOException exception){
             output = new OperationOutput(OutputType.ERROR,"Connection to " + countriesRestUrl + " is not available");
+            loggerService.logOutputAndException(output, exception ,this.getClass());
         }
         return output;
     }
@@ -88,9 +95,8 @@ public class CountriesDataGatherImpl implements CountriesDataGather {
             output = new SingleOutput(OutputType.SUCCESS, new JsonDTO(jsonAsString.toString()));
 
         } catch (IOException exception) {
-
             output = new SingleOutput(OutputType.ERROR,"Received data is not readable");
-
+            loggerService.logOutputAndException(output, exception ,this.getClass());
         }
 
         return output;
@@ -104,9 +110,10 @@ public class CountriesDataGatherImpl implements CountriesDataGather {
         try {
             httpConnectionToRestSourse.disconnect();
             output = new OperationOutput(OutputType.SUCCESS);
-        } catch (Exception exp) {
+        } catch (Exception exception) {
             output = new OperationOutput(OutputType.ERROR,
                     "connection to Rest source could not be disconnected");
+            loggerService.logOutputAndException(output, exception ,this.getClass());
         }
 
         return output;
