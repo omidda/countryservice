@@ -12,6 +12,10 @@ public class CountryDTO extends CountryBriefDTO {
         super();
     }
 
+    public CountryDTO(CountryBriefDTO countryBriefDTO){
+        super(countryBriefDTO);
+    }
+
     public CountryDTO(String name, String country_code, String capital, Long population, String flag_file_url) {
         super(name, country_code);
         this.capital = capital;

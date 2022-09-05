@@ -8,6 +8,11 @@ public class CountryBriefDTO implements IResult {
 
     public CountryBriefDTO(){}
 
+    public CountryBriefDTO(CountryBriefDTO inputDTO){
+        this.name = inputDTO.getName();
+        this.country_code = inputDTO.getCountry_code();
+    }
+
     public CountryBriefDTO(String name, String country_code) {
         this.name = name;
         this.country_code = country_code;
