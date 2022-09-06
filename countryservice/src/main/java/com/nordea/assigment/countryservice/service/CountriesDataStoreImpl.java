@@ -3,12 +3,14 @@ package com.nordea.assigment.countryservice.service;
 import com.nordea.assigment.countryservice.model.dto.CountryBriefDTO;
 import com.nordea.assigment.countryservice.model.dto.CountryDTO;
 import com.nordea.assigment.countryservice.model.entity.CountryEntity;
+import com.nordea.assigment.countryservice.model.events.CountryServiceEvent;
 import com.nordea.assigment.countryservice.model.ouputs.ListOutput;
 import com.nordea.assigment.countryservice.model.ouputs.OperationOutput;
 import com.nordea.assigment.countryservice.model.ouputs.OutputType;
 import com.nordea.assigment.countryservice.model.ouputs.SingleOutput;
 import com.nordea.assigment.countryservice.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,13 +24,16 @@ public class CountriesDataStoreImpl implements CountriesDataStore {
 
     CountryRepository countryRepository;
     CountryServiceLogger loggerService;
+    ApplicationEventPublisher eventPublisher;
 
     @Autowired
     public CountriesDataStoreImpl(CountryRepository countryRepository,
-                                  CountryServiceLogger countryServiceLogger){
+                                  CountryServiceLogger countryServiceLogger,
+                                  ApplicationEventPublisher eventPublisher){
 
         this.countryRepository = countryRepository;
         this.loggerService = countryServiceLogger;
+        this.eventPublisher = eventPublisher;
 
     }
 
@@ -74,9 +79,8 @@ public class CountriesDataStoreImpl implements CountriesDataStore {
                 output = new ListOutput(OutputType.SUCCESS, (List) outputDTOs);
 
             } else {
-
                 output = new ListOutput(OutputType.SUCCESS, "Countries data not found");
-
+                publishAnEventToGatherCountriesData();
             }
         }
         catch (Exception exception){
@@ -195,4 +199,10 @@ public class CountriesDataStoreImpl implements CountriesDataStore {
 
         return outputDTOList;
     }
+
+    void publishAnEventToGatherCountriesData(){
+        CountryServiceEvent eventToPublish = new CountryServiceEvent(this, "Country data is needed");
+        eventPublisher.publishEvent(eventToPublish);
+    }
+
 }

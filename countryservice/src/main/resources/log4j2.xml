@@ -8,8 +8,8 @@
 
 
         <RollingFile name="RollingFile"
-                     fileName="${env:COUNTRY_SERVIE_LOG_PATH}/country_service.log"
-                     filePattern="${env:COUNTRY_SERVIE_LOG_PATH}/logs/$${date:yyyy-MM}/spring-boot-logger-log4j2-%d{-dd-MMMM-yyyy}-%i.log.gz">
+                     fileName="${env:COUNTRY_SERVICE_LOG_PATH}/country_service.log"
+                     filePattern="${env:COUNTRY_SERVICE_LOG_PATH}/logs/$${date:yyyy-MM}/spring-boot-logger-log4j2-%d{-dd-MMMM-yyyy}-%i.log.gz">
             <PatternLayout>
                 <pattern>%d %p %C{1.} [%t] %m%n</pattern>
             </PatternLayout>

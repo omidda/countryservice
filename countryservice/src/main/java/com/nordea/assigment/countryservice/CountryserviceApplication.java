@@ -4,8 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.retry.annotation.EnableRetry;
 
 @SpringBootApplication
+@EnableRetry
 public class CountryserviceApplication {
 
 
@@ -21,9 +23,9 @@ public class CountryserviceApplication {
 
 
 	static void checkLoggingEnvironmentVariableAndSetInternalProperties(){
-		if(!System.getenv().containsKey("COUNTRY_SERVIE_LOG_PATH") || System.getenv("COUNTRY_SERVIE_LOG_PATH").isEmpty())
+		if(!System.getenv().containsKey("COUNTRY_SERVICE_LOG_PATH") || System.getenv("COUNTRY_SERVICE_LOG_PATH").isEmpty())
 		{
-			logger.error("COUNTRY_SERVIE_LOG_PATH is not defined, please set this environment variable to store country service logs.");
+			logger.error("COUNTRY_SERVICE_LOG_PATH is not defined, please set this environment variable to store country service logs.");
 		}
 	}
 

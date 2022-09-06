@@ -244,7 +244,7 @@ class FetchingAndProcessingCountriesDataTests {
 				"        }\n" +
 				"    }]";
 
-		ListOutput processedCountriesList = jsonProcessor.processJsonStringAndConvertToCountriesList(jsonString);
+		ListOutput processedCountriesList = jsonProcessor.processJsonStringAndConvertToCountriesList(new JsonDTO(jsonString));
 
 		assertThat(processedCountriesList).isNotNull();
 		assertThat(((CountryDTO)processedCountriesList.getResults().get(0)).getName()).isEqualTo("Finland");

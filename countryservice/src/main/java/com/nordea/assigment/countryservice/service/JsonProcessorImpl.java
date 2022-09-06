@@ -1,6 +1,7 @@
 package com.nordea.assigment.countryservice.service;
 
 import com.nordea.assigment.countryservice.model.dto.CountryDTO;
+import com.nordea.assigment.countryservice.model.dto.JsonDTO;
 import com.nordea.assigment.countryservice.model.ouputs.ListOutput;
 import com.nordea.assigment.countryservice.model.ouputs.OutputType;
 import org.json.simple.JSONArray;
@@ -28,13 +29,13 @@ public class JsonProcessorImpl  implements JsonProcessor{
     }
 
     @Override
-    public ListOutput processJsonStringAndConvertToCountriesList(String inputJson){
+    public ListOutput processJsonStringAndConvertToCountriesList(JsonDTO inputJson){
 
         ListOutput countriesOutput;
 
         try {
 
-            JSONArray jsonArrayOfCountries = (JSONArray) jsonParser.parse(inputJson);
+            JSONArray jsonArrayOfCountries = (JSONArray) jsonParser.parse(inputJson.getJson());
             List countryDTOS = convertJsonArrayToCountryDTOList(jsonArrayOfCountries);
 
             if(countryDTOS != null && countryDTOS.size() > 0)
