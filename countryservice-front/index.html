@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>NORDEA task assignment - countries service </title>
+    <link rel="stylesheet" href="./main.css">
+    <script type="text/javascript" src="./main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <style>
+
+    </style>
+  </head>
+  <body>
+   
+    <div id="main-wrapper">
+    
+        <div class="ui-widget">
+            <label for="countries">Countries : </label>
+            <input id="countries"  onfocus="this.select();">
+        </div>
+
+        <script>
+        fetchAllCountriesData();
+        
+        </script>
+
+        <div>
+            <div class="country-detail-row"><span class="country-detail-title">Name         </span><span id="countryName"></span></div>
+            <div class="country-detail-row"><span class="country-detail-title">Country code </span><span id="countryCode"></span></div>
+            <div class="country-detail-row"><span class="country-detail-title">Capital      </span><span id="countryCapital"></span></div>
+            <div class="country-detail-row"><span class="country-detail-title">Population   </span><span id="countryPopulation"></span></div>
+            <p><img id="countryImage" src="" /></p>
+
+        </div>
+
+    </div>
+  </body>
+</html>
