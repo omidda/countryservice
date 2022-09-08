@@ -22,9 +22,9 @@ import java.util.List;
 @Service
 public class CountriesDataStoreImpl implements CountriesDataStore {
 
-    CountryRepository countryRepository;
-    CountryServiceLogger loggerService;
-    ApplicationEventPublisher eventPublisher;
+    final CountryRepository countryRepository;
+    final CountryServiceLogger loggerService;
+    final ApplicationEventPublisher eventPublisher;
 
     @Autowired
     public CountriesDataStoreImpl(CountryRepository countryRepository,
@@ -51,12 +51,12 @@ public class CountriesDataStoreImpl implements CountriesDataStore {
 
         List<CountryEntity> insertedEntities = countryRepository.saveAll(entitiesToInsert);
 
-        if(insertedEntities != null && insertedEntities.size() > 0){
+        if(insertedEntities.size() > 0){
             output = new ListOutput(OutputType.SUCCESS, (List) inputDTOs);
         }
         else {
             output = new ListOutput(OutputType.ERROR,
-                    "An error occured while persisting countries");
+                    "An error occurred while persisting countries");
         }
 
         return output;
@@ -71,8 +71,7 @@ public class CountriesDataStoreImpl implements CountriesDataStore {
             List<CountryEntity> retrievedCountries =
                     countryRepository.findAll();
 
-            if (retrievedCountries != null &&
-                    retrievedCountries.size() > 0) {
+            if (retrievedCountries.size() > 0) {
 
                 List<CountryBriefDTO> outputDTOs = convertCountryEntityToBriefDTOList(retrievedCountries);
 
@@ -84,7 +83,7 @@ public class CountriesDataStoreImpl implements CountriesDataStore {
             }
         }
         catch (Exception exception){
-            output = new ListOutput(OutputType.ERROR,"An error occured while fetching countries list.");
+            output = new ListOutput(OutputType.ERROR,"An error occurred while fetching countries list.");
             loggerService.logOutputAndException(output, exception ,this.getClass());
         }
 
@@ -110,7 +109,7 @@ public class CountriesDataStoreImpl implements CountriesDataStore {
             }
         }
         catch (Exception exception){
-            output = new SingleOutput(OutputType.ERROR,"An error occured while fetching " +
+            output = new SingleOutput(OutputType.ERROR,"An error occurred while fetching " +
                     countryName + " data.");
             loggerService.logOutputAndException(output, exception ,this.getClass());
         }
@@ -190,15 +189,6 @@ public class CountriesDataStoreImpl implements CountriesDataStore {
         return outputDTOList;
     }
 
-    List<CountryDTO> convertCountryEntityToDTOList(List<CountryEntity> inputList){
-        List<CountryDTO> outputDTOList = new ArrayList<>();
-
-        inputList.stream().forEach(countryEntity->{
-            outputDTOList.add(convertCountryEntityToDTO(countryEntity));
-        });
-
-        return outputDTOList;
-    }
 
     void publishAnEventToGatherCountriesData(){
         CountryServiceEvent eventToPublish = new CountryServiceEvent(this, "Country data is needed");

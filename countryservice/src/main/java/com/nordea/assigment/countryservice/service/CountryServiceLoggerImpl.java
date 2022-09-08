@@ -23,7 +23,6 @@ public class CountryServiceLoggerImpl implements CountryServiceLogger {
                     case SUCCESS -> logSuccess(outputForLog, invokerClass);
                     case ERROR -> logError(outputForLog, invokerClass);
                 }
-                ;
             }
 
             logAnException(exceptionForLog, invokerClass);

@@ -1,7 +1,5 @@
 package com.nordea.assigment.countryservice.model.dto;
 
-import com.nordea.assigment.countryservice.model.ouputs.IResult;
-
 public class CountryDTO extends CountryBriefDTO {
 
     private String capital;
@@ -14,13 +12,6 @@ public class CountryDTO extends CountryBriefDTO {
 
     public CountryDTO(CountryBriefDTO countryBriefDTO){
         super(countryBriefDTO);
-    }
-
-    public CountryDTO(String name, String country_code, String capital, Long population, String flag_file_url) {
-        super(name, country_code);
-        this.capital = capital;
-        this.population = population;
-        this.flag_file_url = flag_file_url;
     }
 
     public String getCapital() {

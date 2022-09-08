@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CountryServiceEventListenerImpl implements ApplicationListener<CountryServiceEvent> {
 
-    CountryServiceLogger loggerService;
-    CountryServiceCordinator countryServiceCordinator;
+    final CountryServiceLogger loggerService;
+    final CountryServiceCordinator countryServiceCordinator;
 
     @Autowired
     public CountryServiceEventListenerImpl(CountryServiceLogger loggerService,CountryServiceCordinator countryServiceCordinator){

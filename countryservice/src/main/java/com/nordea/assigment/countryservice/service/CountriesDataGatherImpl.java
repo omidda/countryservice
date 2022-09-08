@@ -25,7 +25,7 @@ public class CountriesDataGatherImpl implements CountriesDataGather {
     }
     private final static String countriesRestUrl = "https://restcountries.com/v3.1/all";
     private final static String countriesRestHttpMethod = "GET";
-    private HttpURLConnection httpConnectionToRestSourse;
+    private HttpURLConnection httpConnectionToRestSource;
 
 
     @Override
@@ -55,17 +55,17 @@ public class CountriesDataGatherImpl implements CountriesDataGather {
 
             URL countriesRestUrlObject = new URL(countriesRestUrl);
 
-            httpConnectionToRestSourse = (HttpURLConnection) countriesRestUrlObject.openConnection();
-            httpConnectionToRestSourse.setRequestMethod(countriesRestHttpMethod);
-            httpConnectionToRestSourse.connect();
+            httpConnectionToRestSource = (HttpURLConnection) countriesRestUrlObject.openConnection();
+            httpConnectionToRestSource.setRequestMethod(countriesRestHttpMethod);
+            httpConnectionToRestSource.connect();
 
-            int httpResponceCode = httpConnectionToRestSourse.getResponseCode();
-            if(httpResponceCode == 200)
+            int httpResponseCode = httpConnectionToRestSource.getResponseCode();
+            if(httpResponseCode == 200)
             {
                 output = new OperationOutput(OutputType.SUCCESS);
             }
             else {
-                output = new OperationOutput(OutputType.ERROR, "Resource is not available, response code: " + httpResponceCode);
+                output = new OperationOutput(OutputType.ERROR, "Resource is not available, response code: " + httpResponseCode);
                 loggerService.logAnOutput(output,this.getClass());
             }
 
@@ -84,7 +84,7 @@ public class CountriesDataGatherImpl implements CountriesDataGather {
         try {
 
             StringBuilder jsonAsString = new StringBuilder();
-            Scanner scanner = new Scanner(httpConnectionToRestSourse.getInputStream());
+            Scanner scanner = new Scanner(httpConnectionToRestSource.getInputStream());
 
             while (scanner.hasNext()) {
                 jsonAsString.append(scanner.nextLine());
@@ -103,20 +103,15 @@ public class CountriesDataGatherImpl implements CountriesDataGather {
 
     }
 
-    private OperationOutput disconnectFromRestResource() {
-
-        OperationOutput output;
+    private void disconnectFromRestResource() {
 
         try {
-            httpConnectionToRestSourse.disconnect();
-            output = new OperationOutput(OutputType.SUCCESS);
+            httpConnectionToRestSource.disconnect();
         } catch (Exception exception) {
-            output = new OperationOutput(OutputType.ERROR,
-                    "connection to Rest source could not be disconnected");
-            loggerService.logOutputAndException(output, exception ,this.getClass());
+            loggerService.logOutputAndException(new OperationOutput(OutputType.ERROR,
+                    "connection to Rest source could not be disconnected"), exception ,this.getClass());
         }
 
-        return output;
     }
 
 

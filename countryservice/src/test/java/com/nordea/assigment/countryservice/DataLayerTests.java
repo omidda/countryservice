@@ -1,17 +1,10 @@
 package com.nordea.assigment.countryservice;
 
 import com.nordea.assigment.countryservice.model.dto.CountryDTO;
-import com.nordea.assigment.countryservice.model.dto.JsonDTO;
 import com.nordea.assigment.countryservice.model.ouputs.ListOutput;
-import com.nordea.assigment.countryservice.model.ouputs.OperationOutput;
 import com.nordea.assigment.countryservice.model.ouputs.OutputType;
 import com.nordea.assigment.countryservice.model.ouputs.SingleOutput;
-import com.nordea.assigment.countryservice.service.CountriesDataGather;
 import com.nordea.assigment.countryservice.service.CountriesDataStore;
-import com.nordea.assigment.countryservice.service.JsonProcessor;
-import org.json.simple.parser.ParseException;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,7 +19,6 @@ class DataLayerTests {
 
 	@Autowired
 	CountriesDataStore countriesDataStore;
-
 
 	public List<CountryDTO> setUpListToInsert() {
 
@@ -91,7 +83,6 @@ class DataLayerTests {
 		assertThat(((CountryDTO)result.getResults().get(0)).getName()).isEqualTo("Finland");
 
 	}
-
 
 	@Test
 	public void assertFetchingOneCountry() {

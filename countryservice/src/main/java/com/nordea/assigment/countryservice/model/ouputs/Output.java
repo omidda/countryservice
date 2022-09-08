@@ -18,11 +18,8 @@ public abstract class Output {
 
     public Boolean isOperationSuccessful(){
 
-        if(type != null && type.equals(OutputType.SUCCESS))
-            return true;
-
-        return false;
-    };
+        return type != null && type.equals(OutputType.SUCCESS);
+    }
 
     public String getMessage() {
         return message;

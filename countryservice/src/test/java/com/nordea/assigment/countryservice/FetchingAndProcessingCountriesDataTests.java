@@ -7,7 +7,6 @@ import com.nordea.assigment.countryservice.model.ouputs.OutputType;
 import com.nordea.assigment.countryservice.model.ouputs.SingleOutput;
 import com.nordea.assigment.countryservice.service.CountriesDataGather;
 import com.nordea.assigment.countryservice.service.JsonProcessor;
-import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,7 +30,7 @@ class FetchingAndProcessingCountriesDataTests {
 	}
 
 	@Test
-	public void testJsonProcessing() throws ParseException {
+	public void testJsonProcessing() {
 
 		String jsonString = "[{\n" +
 				"        \"name\": {\n" +

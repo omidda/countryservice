@@ -15,28 +15,23 @@ import java.util.List;
 @Service
 public class CountryServiceCordinatorImpl implements CountryServiceCordinator {
 
-    CountriesDataGather countriesDataGather;
-    CountriesDataStore countriesDataStore;
-    JsonProcessor jsonProcessor;
-    CountryServiceLogger countryServiceLogger;
+    final CountriesDataGather countriesDataGather;
+    final CountriesDataStore countriesDataStore;
+    final JsonProcessor jsonProcessor;
+    final CountryServiceLogger countryServiceLogger;
 
     @Autowired
     public CountryServiceCordinatorImpl(CountriesDataGather countriesDataGather,
                                         CountriesDataStore countriesDataStore,
                                         JsonProcessor jsonProcessor,
-                                        CountryServiceLogger countryServiceLogger){
+                                        CountryServiceLogger countryServiceLogger) {
 
         this.countriesDataStore = countriesDataStore;
         this.countriesDataGather = countriesDataGather;
         this.jsonProcessor = jsonProcessor;
         this.countryServiceLogger = countryServiceLogger;
 
-        try {
-            fetchCountriesDataAndStore();
-        }
-        catch (Exception ex){}
-
-
+        fetchCountriesDataAndStore();
     }
 
     @EventListener(ApplicationReadyEvent.class)

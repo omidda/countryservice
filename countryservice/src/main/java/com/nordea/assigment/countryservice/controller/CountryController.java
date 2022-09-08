@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+// This annotation is for enabling front-end layer connection to back-end Rest services.
+// Without CrossOrigin policy browser prevent making request in localhost.
+// It can be limited to a specific domain such as *.nordea.com
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class CountryController {
 
-    CountriesDataStore countriesDataStore;
+    final CountriesDataStore countriesDataStore;
 
     @Autowired
     public  CountryController(CountriesDataStore countriesDataStore){
