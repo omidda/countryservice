@@ -11,8 +11,9 @@ The repository consists of two folders:
 - **Maven**   - https://maven.apache.org/install.html
 - **Java 17** - https://www.oracle.com/java/technologies/downloads/#java17
 - **Environment Variables** : This variable should be defined in your OS, Cloud provider dashboard or in your IDE before running the project. 
--- COUNTRY_SERVICE_LOG_PATH : Indicate logs' path
--- COUNTRY_SERVICE_HTTP_PORT : Indicate micro-service's HTTP port
+>COUNTRY_SERVICE_LOG_PATH : Indicate logs' path
+
+>COUNTRY_SERVICE_HTTP_PORT : Indicate micro-service's HTTP port
 
 >these environment variables make a straightforward way to containerize the micro-service
 
