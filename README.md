@@ -42,6 +42,13 @@ The application events are logged on a file-size base rotating policy and this p
  ### Data Layer
  - **CountryRepository** : A repository for database operations which use **CountryEntity** to persist fetched data.
 
+### Testing
+Some unit test is written in the test folder. 
+ - **DataLayerTests** : Contains test cases related to the data layer for inserting and fetching data.
+ - **FetchingAndProcessingCountriesDataTests** : Testing fetching and processing JSON data related services
+
+> We can add integration or end-to-end test, as well as different test cases to reach a better test coverage.
+
 ## Front-end 
 To run this simple Front-end application you just need a browser that can run JavaScript code. Do not worry most modern browsers do it. Just open **index.html** and type the country's name in the text box.
 
@@ -50,3 +57,5 @@ To run this simple Front-end application you just need a browser that can run Ja
 ![enter image description here](https://i.postimg.cc/d3wP9FHt/1.png)
 
 ![enter image description here](https://i.postimg.cc/QtP0qZXK/2.png)
+
+
