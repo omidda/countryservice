@@ -29,6 +29,39 @@ The repository consists of two folders:
  - spring-boot-starter-data-jpa: Spring JPA for storing data and working with database
  - h2: Is an embedded in-memory database for storing countries' data
 
+### Rest APIs
+GET /countries/
+```
+response:
+          {
+                   "countries": [
+                             {
+                                       "name": "Finland",
+                                       "country_code": "FI"
+                             },
+                             ...
+                   ]
+          }
+```
+ 
+
+GET /countries/{name}
+
+response:
+
+          {
+
+                   "name": "Finland",
+
+                   "country_code": "FI",
+
+                   "capital": "Helsinki",
+
+                   "population": 5491817,
+
+                   "flag_file_url": "<url to the flag file>"
+
+          }
 ### Logging system
 The application events are logged on a file-size base rotating policy and this policy can be changed. the logs will be stored on the path which is defined in COUNTRY_SERVICE_LOG_PATH  [Read more about log4j configuration.](https://logging.apache.org/log4j/2.x/manual/configuration.html) 
 
